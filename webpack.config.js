@@ -16,6 +16,7 @@ module.exports = (env, argv) => {
     const filename = ext => isProd ? `[name].[contenthash].bundle.${ext}` : `[name].bundle.${ext}`
 
     return {
+        target: 'web',
         context: path.resolve(__dirname, 'src'),
         entry: {
             main: ['@babel/polyfill', './index.js']
@@ -31,6 +32,12 @@ module.exports = (env, argv) => {
                 '@': path.resolve(__dirname, 'src'),
                 // '@core': path.resolve(__dirname, 'src', 'core')
             }
+        },
+        devServer: {
+          port: '3200',
+          open: true,
+          hot: true,
+          watchFiles: './',
         },
         plugins: [
             new HtmlWebpackPlugin({
